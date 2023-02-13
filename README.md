@@ -29,6 +29,7 @@ If you use this repository in your research, please cite the following paper:
   * [Habitat, finding an object](https://github.com/microsoft/PromptCraft-Robotics)
   * [Habitat, finding a room](https://github.com/microsoft/PromptCraft-Robotics)
 * Aerial robotics
+  * [Tello example](examples/aerial_robotics/tello_example.md)
   * [Turbine Inspection](https://github.com/microsoft/PromptCraft-Robotics)
   * [Shelf Inspection](https://github.com/microsoft/PromptCraft-Robotics)
 * Manipulation
