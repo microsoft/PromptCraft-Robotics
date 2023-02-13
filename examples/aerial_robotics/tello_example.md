@@ -61,6 +61,7 @@ Explanation: This code first retrieves the X, Y, Z, and angle position of the "c
 
 ---------------------------------------------------------------------------
 I am still thirsty. Can you find something with sugar and a red logo?
+
 ---------------------------------------------------------------------------
 I'm assuming you are referring to a can of "regular coke". Here is the code to fly to the "regular coke can" object:
 ```python
@@ -72,6 +73,7 @@ Explanation: This code first retrieves the X, Y, Z, and angle position of the "r
 
 ---------------------------------------------------------------------------
 Take a selfie using a reflective surface.
+
 ---------------------------------------------------------------------------
 Sure, you can use the "mirror" object to take a selfie with the drone. Here's the code to fly to the "mirror" and take a selfie:
 ```python
