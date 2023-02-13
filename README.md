@@ -1,14 +1,48 @@
-# Project
+# PromptCraft-Robotics
 
-> This repo has been populated by an initial template to help get you started. Please
-> make sure to update the content to build a great experience for community-building.
+The PromptCraft-Robotics repository serves as community for people to share interesting prompting examples for large language models (LLMs) within the robotics domain.
+We focus on LLMs with open APIs (for example OpenAI models such as [ChatGPT](https://openai.com/blog/chatgpt/), [GPT-3](https://openai.com/api/) and Codex), but we also welcome examples from other LLMs (for example open-sourced models).
 
-As the maintainer of this project, please make a few updates:
+Users can contribute to this repository by submitting interesting prompt examples to the [Discussions](https://github.com/microsoft/PromptCraft-Robotics/discussions) section of this repository. A prompt can be submitted within different robotics categories such as [Manipulation](https://github.com/microsoft/PromptCraft-Robotics/discussions/categories/llm-manipulation), [Home Robotics](https://github.com/microsoft/PromptCraft-Robotics/discussions/categories/llm-home-robots), [Physical Reasoning](https://github.com/microsoft/PromptCraft-Robotics/discussions/categories/llm-physical-reasoning), among many others.
+Once submitted, the prompt will be reviewed by the community (upvote your favorites!) and added to the repository by a team of admins if it is deemed interesting and useful.
+We encourage users to submit prompts that are interesting, fun, or useful. We also encourage users to submit prompts that are not necessarily "correct" or "optimal" but are interesting nonetheless.
 
-- Improving this README.MD file to provide a great experience
-- Updating SUPPORT.MD with content about this project's support experience
-- Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
+We encourage prompt submissions in terms of an HTML conversation. You can use this reposotory to export your ChatGPT chat for example: [ADD MORE INTRUCTIONS HERE]
+
+## Paper, videos and citations
+
+Paper: [ADD OUR ARXIV LINK]
+Video: [ADD OUR MAIN VIDEO YOUTUBE LINK]
+
+If you use this repository in your research, please cite the following paper:
+
+    @inproceedings{ourpaper,
+      author = {Forster, Christian and Pizzoli, Matia and Scaramuzza, Davide},
+      title = {{SVO}: Fast Semi-Direct Monocular Visual Odometry},
+      booktitle = {IEEE International Conference on Robotics and Automation (ICRA)},
+      year = {2023}
+    }
+
+## Guides & examples
+
+* Home robotics 
+  * [Habitat, finding an object](https://github.com/microsoft/PromptCraft-Robotics)
+  * [Habitat, finding a room](https://github.com/microsoft/PromptCraft-Robotics)
+* Aerial robotics
+  * [Turbine Inspection](https://github.com/microsoft/PromptCraft-Robotics)
+  * [Shelf Inspection](https://github.com/microsoft/PromptCraft-Robotics)
+* Manipulation
+  * [Block stacking](https://github.com/microsoft/PromptCraft-Robotics)
+  * [Compose block colors](https://github.com/microsoft/PromptCraft-Robotics)
+  * [Push](https://github.com/microsoft/PromptCraft-Robotics)
+
+## Related resources
+
+Beyond the prompt examples here, we leave useful and related links to the use of large language models below:
+
+* [Read about the OpenAI APIs](https://openai.com/api/)
+* [Azure OpenAI service](https://azure.microsoft.com/en-us/products/cognitive-services/openai-service)
+* [OPT language model](https://huggingface.co/docs/transformers/model_doc/opt)
 
 ## Contributing
 
