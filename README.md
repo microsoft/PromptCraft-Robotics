@@ -36,6 +36,8 @@ If you use this repository in your research, please cite the following paper:
   * [Block stacking](https://github.com/microsoft/PromptCraft-Robotics)
   * [Compose block colors](https://github.com/microsoft/PromptCraft-Robotics)
   * [Push](https://github.com/microsoft/PromptCraft-Robotics)
+* Spatial-temporal reasoning
+  * [Visual servoing with basketball](examples/spatial_temporal_reasoning/visual_servoing_basketball.md)
 
 ## Related resources
 
