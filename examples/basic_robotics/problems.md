@@ -116,3 +116,24 @@ def get_transformation_matrix(a, b):
         T = np.array([[1, 0, 0, 5], [0, -1, 0, 0], [0, 0, -1, 1], [0, 0, 0, 1]])
         return T
 ```
+
+---
+**Imagine we are trying to control a quad rotor drone. We are allowed to send PWM commands to the motor drones, which are of the range [1000, 2000]. Can you give me an example command I could send to make the drone pitch forward?**
+
+---
+To make the drone pitch forward, you would need to increase the speed of the front motors while decreasing the speed of the rear motors. For example, you could send the following PWM commands:
+Front-left motor: 1500 + 100 = 1600
+Front-right motor: 1500 + 100 = 1600
+Rear-left motor: 1500 - 100 = 1400
+Rear-right motor: 1500 - 100 = 1400
+
+---
+What if I wanted the drone to yaw in a clockwise direction?
+
+---
+To make the drone yaw in a clockwise direction, you would need to increase the speed of the front-right motor and the rear-left motor, while decreasing the speed of the front-left and rear-right motors. For example, you could send the following PWM commands:
+Front-left motor: 1500 - 100 = 1400
+Front-right motor: 1500 + 100 = 1600
+Rear-left motor: 1500 + 100 = 1600
+Rear-right motor: 1500 - 100 = 1400
+
