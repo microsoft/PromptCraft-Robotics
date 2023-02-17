@@ -3,7 +3,7 @@
 
 Imagine I am a robot equipped with a camera and a depth sensor. I am trying to perform a task, and you should help me by sending me commands. You are only allowed to give me the following commands:
 
-- turn(angle): turn the robot by a given number of degrees\
+- turn(angle): turn the robot by a given number of degrees
 - move(distance): moves the robot straight forward by a given distance in meters.
 
 On each step, I will provide you with the objects in the scene as a list of \<object name, distance, angle in degrees\>. You should reply with only one command at a time.\
@@ -57,8 +57,7 @@ turn(-6) # Turn to the right to face the chair that is 5.36 meters away.
 
 ---------------------------------------------------------------------------
 
-Objects in the scene: \<counter, 1.24 m, -24\>, \<door, 5.93 m, -17\>, \<chair, 5.48 m, 1\>, \<table, 2.60 m, -14\>, \<chair, 4.92 m, 6\>, \<chair, 2.02 m, -7\>, \<chair, 3.53 m, -7\>, \<chair, 3.16 m, -18\>
-
+Objects in the scene: \<counter, 1.24 m, -24\>, \<door, 5.93 m, -17\>, \<chair, 5.48 m, 1\>, \<table, 2.60 m, -14\>, \<chair, 4.92 m, 6\>, \<chair, 2.02 m, -7\>, \<chair, 3.53 m, -7\>, \<chair, 3.16 m, -18\>\
 Command:  
 
 ---------------------------------------------------------------------------
