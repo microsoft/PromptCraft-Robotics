@@ -130,6 +130,7 @@ You can call this function by running move_to_bottle(). Let me know if you have 
 ---
 **Thank you. Can you combine both pieces of code and give me one script, which will explore to find the object of interest (bottle for example but can be anything), and then also move the agent towards it?
 **
+
 ---
 Certainly! Here's a script that combines the two functions:
 
