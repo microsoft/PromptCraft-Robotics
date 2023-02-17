@@ -13,6 +13,8 @@ The workspace contains several objects placed on a table. Let us assume there is
 I want you to give me code that drops the blue block and the red sphere into the yellow bin, in that order. Don't use variable names that are too long.
 </b>
 
+---
+
 ```
 # Define safe height for each object
 red_height = 5 + 5 # Add 5 cm for safe height above the sphere

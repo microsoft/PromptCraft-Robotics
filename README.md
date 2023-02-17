@@ -29,13 +29,12 @@ If you use this repository in your research, please cite the following paper:
   * [Habitat, finding an object](https://github.com/microsoft/PromptCraft-Robotics)
   * [Habitat, finding a room](https://github.com/microsoft/PromptCraft-Robotics)
 * Aerial robotics
-  * [Tello example](examples/aerial_robotics/tello_example.md)
-  * [Turbine Inspection](https://github.com/microsoft/PromptCraft-Robotics)
-  * [Shelf Inspection](https://github.com/microsoft/PromptCraft-Robotics)
+  * [Real robot: Tello deployment](examples/aerial_robotics/tello_example.md)
+  * [AirSim turbine Inspection](examples/aerial_robotics/airsim_turbine_inspection.md)
+  * [AirSim solar panel Inspection](examples/aerial_robotics/airsim_solarpanel_inspection.md)
 * Manipulation
-  * [Block stacking](https://github.com/microsoft/PromptCraft-Robotics)
-  * [Compose block colors](https://github.com/microsoft/PromptCraft-Robotics)
-  * [Push](https://github.com/microsoft/PromptCraft-Robotics)
+  * [Real robot: Picking, stacking, and building the MSFT logo](examples/manipulation/pick_stack_msft_logo.md)
+  * [Manipulation tasks](examples/manipulation/manipulation_tasks.md)
 * Spatial-temporal reasoning
   * [Visual servoing with basketball](examples/spatial_temporal_reasoning/visual_servoing_basketball.md)
 
