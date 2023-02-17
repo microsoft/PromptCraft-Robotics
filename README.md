@@ -25,13 +25,14 @@ If you use this repository in your research, please cite the following paper:
 
 ## Guides & examples
 
-* Home robotics 
-  * [Habitat, finding an object](https://github.com/microsoft/PromptCraft-Robotics)
-  * [Habitat, finding a room](https://github.com/microsoft/PromptCraft-Robotics)
+* Embodied agent 
+  * [Habitat, finding an object](examples/embodied_agents/visual_language_navigation.md)
+  * [AirSim, object navigation using RGBD](examples/embodied_agents/airsim_objectnavigation.md)
 * Aerial robotics
   * [Real robot: Tello deployment](examples/aerial_robotics/tello_example.md) -> [Video Link](examples/aerial_robotics/airsim_drone_example.md)
   * [AirSim turbine Inspection](examples/aerial_robotics/airsim_turbine_inspection.md) -> [Video Link](examples/aerial_robotics/airsim_drone_example.md)
   * [AirSim solar panel Inspection](examples/aerial_robotics/airsim_solarpanel_inspection.md) -> [Video Link](examples/aerial_robotics/airsim_drone_example.md)
+  * [AirSim obstacle avoidance](examples/aerial_robotics/airsim_obstacleavoidance.md)
 * Manipulation
   * [Real robot: Picking, stacking, and building the MSFT logo](examples/manipulation/pick_stack_msft_logo.md) -> [Video Link](examples/aerial_robotics/airsim_drone_example.md)
   * [Manipulation tasks](examples/manipulation/manipulation_tasks.md)
