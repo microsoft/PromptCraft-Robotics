@@ -3,6 +3,9 @@ import re
 import airsim
 import argparse
 from airsim_wrapper import *
+import math
+import numpy as np
+import os
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--prompt", type=str, default="prompts/airsim_basic.txt")
@@ -43,11 +46,17 @@ while True:
     if question == "!quit" or question == "!exit":
         break
 
+    if question == "!cls":
+        os.system("cls")
+        continue
+
     response = bot.ask(question)
     print(response)
+    print("\n")
 
     code = extract_python_code(response)
     if code is not None:
         print("Please wait while I run the code in AirSim...")
         exec(extract_python_code(response))
         print("Done!")
+        print("\n")

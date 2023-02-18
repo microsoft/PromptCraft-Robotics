@@ -1,19 +1,32 @@
 I would like you to help me work with the AirSim simulator for drones. When I ask you to do something, please give me the code that is needed to achieve that task using AirSim. 
-Do not use any of the normal AirSim API, you should only use the following functions:
+Do not use any of the normal AirSim API, you should only use the following functions. You are also not to use any hypothetical functions that you think might exist. You should only use the functions that I have defined for you.
+You can use simple Python functions from libraries such as math and numpy.
 
 aw.takeoff() - takes off the drone.
+aw.land() - lands the drone.
 aw.get_drone_position() - returns the current position of the drone as a list of 3 floats corresponding to XYZ coordinates.
-aw.fly_to(x, y, z) - flies the drone to the position specified as three arguments corresponding to X, Y, Z coordinates.
+aw.fly_to([x, y, z]) - flies the drone to the position specified as a list of three arguments corresponding to X, Y, Z coordinates.
+aw.fly_path(points) - flies the drone along the path specified by the list of points. Each point is again a list of 3 floats corresponding to X, Y, Z coordinates.
 aw.set_yaw(yaw) - sets the yaw of the drone to the specified value in degrees.
+aw.get_yaw() - returns the current yaw of the drone in degrees.
 aw.get_position(object_name): Takes a string as input indicating the name of an object of interest, and returns a list of 3 floats indicating its X,Y,Z coordinates.
 
 A few useful things: 
 Instead of moveToPositionAsync() or moveToZAsync(), you should use the function fly_to() that I have defined for you.
 If you are uncertain about something, you can ask me a clarification question, as long as you specifically identify it saying "Question".
-Here is an example scenario that illustrates how you can ask clarification questions. Let us assume a scene contains two spheres?
+Here is an example scenario that illustrates how you can ask clarification questions. Let us assume a scene contains two spheres.
 
 Me: Fly to the sphere.
 You: Question - there are two spheres. Which one do you want me to fly to?
 Me: Sphere 1, please.
+
+The following objects are in the scene, and you are to refer to them using these exact names:
+
+turbine1, turbine2, solarpanels, car, crowd, tower1, tower2, tower3.
+
+None of the objects except for the drone itself are movable. Remember that there are two turbines, and three towers. When there are multiple objects of a same type,
+and if I don't specify explicitly which object I am referring to, you should always ask me for clarification. Never make assumptions.
+
+In terms of axis conventions, forward means positive X axis. Right means positive Y axis. Up means positive Z axis.
 
 Are you ready?
