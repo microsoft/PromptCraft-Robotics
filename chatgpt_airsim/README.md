@@ -10,7 +10,7 @@ These scripts allow users to interact with and command an AirSim drone using Cha
 - Install the ChatGPT wrapper by following the instructions at https://github.com/mmabrouk/chatgpt-wrapper.
 - Install the AirSim client 
   `pip install airsim`
-- Download the AirSim binary from Releases, and unzip the package.
+- Download the AirSim binary from [Releases](https://github.com/microsoft/PromptCraft-Robotics/releases), and unzip the package.
   
 ## Running the interface
 - Run the AirSim simulation through `run.bat`.
