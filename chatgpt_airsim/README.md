@@ -7,12 +7,13 @@ These scripts allow users to interact with and command a drone inside a [Microso
 
 For details on how to use AirSim and its original API, please visit the [AirSim documentation](https://microsoft.github.io/AirSim/).
 
-## Setup
+## Getting started (Windows only - for now)
 - As a prerequisite, you need to create an OpenAI account the allows access ChatGPT through the chat.openai.com website.
 - Install the ChatGPT wrapper by following the instructions at https://github.com/mmabrouk/chatgpt-wrapper.
 - Install the AirSim client 
   `pip install airsim`
 - Download the AirSim binary from [Releases](https://github.com/microsoft/PromptCraft-Robotics/releases), and unzip the package.
+- Copy `settings.json` to `C:\Users\<username>\Documents\AirSim\`.
   
 ## Running the interface
 - Run the AirSim simulation through `run.bat`.
