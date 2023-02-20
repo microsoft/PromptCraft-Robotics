@@ -7,37 +7,48 @@ Users can contribute to this repository by submitting interesting prompt example
 Once submitted, the prompt will be reviewed by the community (upvote your favorites!) and added to the repository by a team of admins if it is deemed interesting and useful.
 We encourage users to submit prompts that are interesting, fun, or useful. We also encourage users to submit prompts that are not necessarily "correct" or "optimal" but are interesting nonetheless.
 
-We encourage prompt submissions in terms of an HTML conversation. You can use this reposotory to export your ChatGPT chat for example: [ADD MORE INTRUCTIONS HERE]
+We encourage prompt submissions in markup language, so that they can be easily transferred to the main repository. Please specify which LLM you used, and if possible provide other visuals of the model in action such as videos and pictures.
 
 ## Paper, videos and citations
 
 Paper: [ADD OUR ARXIV LINK]
-Video: [ADD OUR MAIN VIDEO YOUTUBE LINK]
+
+Video: https://youtu.be/NYd0QcZcS6Q
 
 If you use this repository in your research, please cite the following paper:
 
-    @inproceedings{ourpaper,
-      author = {Forster, Christian and Pizzoli, Matia and Scaramuzza, Davide},
-      title = {{SVO}: Fast Semi-Direct Monocular Visual Odometry},
-      booktitle = {IEEE International Conference on Robotics and Automation (ICRA)},
+    @inproceedings{vemprala2023chatgptrobotics,
+      author = {Vemprala, Sai and Bonatti, Rogerio and Bucker, Arthur and Kapoor, Ashish},
+      title = {Chat{GPT} for Robotics: Design Principles and Model Abilities},
+      booktitle = {Technical Report MSR-TR-2023-8, Microsoft Research, Redmond, WA},
       year = {2023}
     }
 
-## Guides & examples
+## LLM Prompting Guides & Examples
+
+The list below contains links to the different robotics categories and their corresponding prompt examples. We welcome contributions to this repository to add more robotics categories and examples. Please submit prompt examples to the [Discussions](https://github.com/microsoft/PromptCraft-Robotics/discussions) page, or submit a pull request with your category and examples.
 
 * Embodied agent 
-  * [Habitat, finding an object](examples/embodied_agents/visual_language_navigation.md)
-  * [AirSim, object navigation using RGBD](examples/embodied_agents/airsim_objectnavigation.md)
+  * [ChatGPT - Habitat, closed loop object navigation 1](examples/embodied_agents/visual_language_navigation_1.md)
+  * [ChatGPT - Habitat, closed loop object navigation 2](examples/embodied_agents/visual_language_navigation_2.md)
+  * [ChatGPT - AirSim, object navigation using RGBD](examples/embodied_agents/airsim_objectnavigation.md)
 * Aerial robotics
-  * [Real robot: Tello deployment](examples/aerial_robotics/tello_example.md) -> [Video Link](examples/aerial_robotics/airsim_drone_example.md)
-  * [AirSim turbine Inspection](examples/aerial_robotics/airsim_turbine_inspection.md) -> [Video Link](examples/aerial_robotics/airsim_drone_example.md)
-  * [AirSim solar panel Inspection](examples/aerial_robotics/airsim_solarpanel_inspection.md) -> [Video Link](examples/aerial_robotics/airsim_drone_example.md)
-  * [AirSim obstacle avoidance](examples/aerial_robotics/airsim_obstacleavoidance.md)
+  * [ChatGPT - Real robot: Tello deployment](examples/aerial_robotics/tello_example.md) | [Video Link](https://youtu.be/i5wZJFb4dyA)
+  * [ChatGPT - AirSim turbine Inspection](examples/aerial_robotics/airsim_turbine_inspection.md) | [Video Link](https://youtu.be/38lA3U2J43w)
+  * [ChatGPT - AirSim solar panel Inspection](examples/aerial_robotics/airsim_solarpanel_inspection.md)
+  * [ChatGPT - AirSim obstacle avoidance](examples/aerial_robotics/airsim_obstacleavoidance.md) | [Video Link](https://youtu.be/Vn6NapLlHPE)
 * Manipulation
-  * [Real robot: Picking, stacking, and building the MSFT logo](examples/manipulation/pick_stack_msft_logo.md) -> [Video Link](examples/aerial_robotics/airsim_drone_example.md)
-  * [Manipulation tasks](examples/manipulation/manipulation_tasks.md)
+  * [ChatGPT - Real robot: Picking, stacking, and building the MSFT logo](examples/manipulation/pick_stack_msft_logo.md) | [Video Link](https://youtu.be/wLOChUtdqoA)
+  * [ChatGPT - Manipulation tasks](examples/manipulation/manipulation_tasks.md)
 * Spatial-temporal reasoning
-  * [Visual servoing with basketball](examples/spatial_temporal_reasoning/visual_servoing_basketball.md)
+  * [ChatGPT - Visual servoing with basketball](examples/spatial_temporal_reasoning/visual_servoing_basketball.md)
+
+
+## LLM+Robotics Simulators
+
+We provice a sample [AirSim](https://github.com/microsoft/AirSim) environment for users to test their ChatGPT prompts. The environment is a binary containing a simple 3D block world with a drone where users can easily send commands in natural language. [[Video Link]](https://youtu.be/iE5tZ6_ZYE8)
+
+We welcome contributions to this repository to add more robotics simulators and environments. Please submit a pull request with your simulator and environment.
 
 ## Related resources
 
