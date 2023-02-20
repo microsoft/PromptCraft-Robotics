@@ -3,7 +3,9 @@
 <a href="https://www.youtube.com/watch?v=iE5tZ6_ZYE8
 " target="_blank">Demonstration Video</a>
 
-These scripts allow users to interact with and command an AirSim drone using ChatGPT. ChatGPT is given access to a high-level function library containing some primitives for navigation, environmental information etc. which in turn maps to several internal AirSim functions. This mapping is done through an AirSim wrapper, which can be seen in `airsim_wrapper.py`. An example of a carefully crafted prompt (which also contains the high level function details) can be seen in `prompts/airsim_basic.txt`. The core logic of the interface is in `chatgpt_airsim.py`.
+These scripts allow users to interact with and command a drone inside a [Microsoft AirSim](https://github.com/microsoft/AirSim) simulation using ChatGPT. ChatGPT is given access to a high-level function library containing some primitives for navigation, environmental information etc. which in turn maps to several internal AirSim functions. This mapping is done through an AirSim wrapper, which can be seen in `airsim_wrapper.py`. An example of a carefully crafted prompt (which also contains the high level function details) can be seen in `prompts/airsim_basic.txt`. The core logic of the interface is in `chatgpt_airsim.py`.
+
+For details on how to use AirSim and its original API, please visit the [AirSim documentation](https://microsoft.github.io/AirSim/).
 
 ## Setup
 - As a prerequisite, you need to create an OpenAI account the allows access ChatGPT through the chat.openai.com website.
