@@ -1,6 +1,6 @@
 # ChatGPT-AirSim Interface
 
-[![Demonstration video](https://user-images.githubusercontent.com/2274262/220219715-40738959-6ad9-4aa4-b369-9d7d8e9a7b6f.png)](https://www.youtube.com/watch?v=iE5tZ6_ZYE8)
+[![Demonstration video](https://user-images.githubusercontent.com/2274262/220220258-db492b6b-2a69-48ef-94a2-208c783f0b8a.png)](https://www.youtube.com/watch?v=iE5tZ6_ZYE8)
 
 These scripts allow users to interact with and command a drone inside a [Microsoft AirSim](https://github.com/microsoft/AirSim) simulation using ChatGPT. ChatGPT is given access to a high-level function library containing some primitives for navigation, environmental information etc. which in turn maps to several internal AirSim functions. This mapping is done through an AirSim wrapper, which can be seen in `airsim_wrapper.py`. An example of a carefully crafted prompt (which also contains the high level function details) can be seen in `prompts/airsim_basic.txt`. The core logic of the interface is in `chatgpt_airsim.py`.
 
