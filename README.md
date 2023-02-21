@@ -7,7 +7,7 @@ Users can contribute to this repository by submitting interesting prompt example
 Once submitted, the prompt will be reviewed by the community (upvote your favorites!) and added to the repository by a team of admins if it is deemed interesting and useful.
 We encourage users to submit prompts that are interesting, fun, or useful. We also encourage users to submit prompts that are not necessarily "correct" or "optimal" but are interesting nonetheless.
 
-We encourage prompt submissions in markup language, so that they can be easily transferred to the main repository. Please specify which LLM you used, and if possible provide other visuals of the model in action such as videos and pictures.
+We encourage prompt submissions formatted as markdown, so that they can be easily transferred to the main repository. Please specify which LLM you used, and if possible provide other visuals of the model in action such as videos and pictures.
 
 ## Paper, videos and citations
 
