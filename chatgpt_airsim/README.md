@@ -9,8 +9,8 @@ For details on how to use AirSim and its original API, please visit the [AirSim 
 
 ## Getting started (Windows only - for now)
 - As a prerequisite, you need to create an OpenAI account the allows access ChatGPT through the chat.openai.com website.
-- Install the required packages  
-`pip install -r requirements.txt`
+- Set up the conda environment  
+`conda env create -f environment.yml`
 - Set up the access token such that the ChatGPT interface can communicate with the model.   
 Navigate to https://chat.openai.com/api/auth/session, and copy the `accessToken`. Paste it in the `access_token` field of `config.json`. 
 - Download the AirSim binary from [Releases](https://github.com/microsoft/PromptCraft-Robotics/releases), and unzip the package.
