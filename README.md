@@ -1,7 +1,7 @@
 # PromptCraft-Robotics
 
 The PromptCraft-Robotics repository serves as community for people to share interesting prompting examples for large language models (LLMs) within the robotics domain.
-We focus on LLMs with open APIs (for example OpenAI models such as [ChatGPT](https://openai.com/blog/chatgpt/), [GPT-3](https://openai.com/api/) and Codex), but we also welcome examples from other LLMs (for example open-sourced models).
+We currently focus on OpenAI's [ChatGPT](https://openai.com/blog/chatgpt/), but we also welcome examples from other LLMs (for example open-sourced models or others with API access such as [GPT-3](https://openai.com/api/) and Codex).
 
 Users can contribute to this repository by submitting interesting prompt examples to the [Discussions](https://github.com/microsoft/PromptCraft-Robotics/discussions) section of this repository. A prompt can be submitted within different robotics categories such as [Manipulation](https://github.com/microsoft/PromptCraft-Robotics/discussions/categories/llm-manipulation), [Home Robotics](https://github.com/microsoft/PromptCraft-Robotics/discussions/categories/llm-home-robots), [Physical Reasoning](https://github.com/microsoft/PromptCraft-Robotics/discussions/categories/llm-physical-reasoning), among many others.
 Once submitted, the prompt will be reviewed by the community (upvote your favorites!) and added to the repository by a team of admins if it is deemed interesting and useful.
@@ -24,7 +24,7 @@ If you use this repository in your research, please cite the following paper:
       year = {2023}
     }
 
-## LLM Prompting Guides & Examples
+## ChatGPT Prompting Guides & Examples
 
 The list below contains links to the different robotics categories and their corresponding prompt examples. We welcome contributions to this repository to add more robotics categories and examples. Please submit prompt examples to the [Discussions](https://github.com/microsoft/PromptCraft-Robotics/discussions) page, or submit a pull request with your category and examples.
 
@@ -44,9 +44,9 @@ The list below contains links to the different robotics categories and their cor
   * [ChatGPT - Visual servoing with basketball](examples/spatial_temporal_reasoning/visual_servoing_basketball.md)
 
 
-## LLM+Robotics Simulators
+## ChatGPT + Robotics Simulator
 
-We provice a sample [AirSim](https://github.com/microsoft/AirSim) environment for users to test their ChatGPT prompts. The environment is a binary containing a simple 3D block world with a drone where users can easily send commands in natural language. [[Video Link]](https://youtu.be/iE5tZ6_ZYE8)
+We provice a sample [AirSim](https://github.com/microsoft/AirSim) environment for users to test their ChatGPT prompts. The environment is a binary containing a sample inspection environment with assets such as wind turbines, electric towers, solar panels etc. The environment comes with a drone and interfaces with ChatGPT such that users can easily send commands in natural language. [[Video Link]](https://youtu.be/iE5tZ6_ZYE8)
 
 We welcome contributions to this repository to add more robotics simulators and environments. Please submit a pull request with your simulator and environment.
 
