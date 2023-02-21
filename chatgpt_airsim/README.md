@@ -9,9 +9,10 @@ For details on how to use AirSim and its original API, please visit the [AirSim 
 
 ## Getting started (Windows only - for now)
 - As a prerequisite, you need to create an OpenAI account the allows access ChatGPT through the chat.openai.com website.
-- Install the ChatGPT wrapper by following the instructions at https://github.com/mmabrouk/chatgpt-wrapper.
-- Install the AirSim client 
-  `pip install airsim`
+- Install the required packages  
+`pip install -r requirements.txt`
+- Set up the access token such that the ChatGPT interface can communicate with the model.   
+Navigate to https://chat.openai.com/api/auth/session, and copy the `accessToken`. Paste it in the `access_token` field of `config.json`. 
 - Download the AirSim binary from [Releases](https://github.com/microsoft/PromptCraft-Robotics/releases), and unzip the package.
 - Copy `settings.json` to `C:\Users\<username>\Documents\AirSim\`.
   
@@ -23,4 +24,4 @@ The interface shows an `AirSim>` prompt when it is ready to take user questions/
 
 We emphasize that this is meant to be a sample environment and interface aimed at getting started with ChatGPT and robotics applications inside a simulation sandbox. ChatGPT generated code could result in unexpected behavior or crashes, especially as the interface is written in a way that it executes the commands directly. That said, we do encourage users to test out the capabilities of the model, and to contribute new prompting techniques, additional wrapper functions, or any other enhancements to this interface.
 
-Additionally, methods of accessing the ChatGPT service (such as the wrapper used in this interface) could change over time. We encourage users to evaluate new ways including official API access or the Azure OpenAI service as appropriate.
+Additionally, methods of accessing the ChatGPT service (such as the revchatGPT package used in this interface) could change over time. We encourage users to keep evaluating new methods including official API access or the Azure OpenAI service as appropriate.
