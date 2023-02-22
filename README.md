@@ -1,6 +1,7 @@
 # PromptCraft-Robotics
 
-The PromptCraft-Robotics repository serves as community for people to share interesting prompting examples for large language models (LLMs) within the robotics domain.
+The PromptCraft-Robotics repository serves as a community for people to test and share interesting prompting examples for large language models (LLMs) within the robotics domain. We also provide a sample robotics simulator (built on Microsoft AirSim) with ChatGPT integration for users to get started.
+
 We currently focus on OpenAI's [ChatGPT](https://openai.com/blog/chatgpt/), but we also welcome examples from other LLMs (for example open-sourced models or others with API access such as [GPT-3](https://openai.com/api/) and Codex).
 
 Users can contribute to this repository by submitting interesting prompt examples to the [Discussions](https://github.com/microsoft/PromptCraft-Robotics/discussions) section of this repository. A prompt can be submitted within different robotics categories such as [Manipulation](https://github.com/microsoft/PromptCraft-Robotics/discussions/categories/llm-manipulation), [Home Robotics](https://github.com/microsoft/PromptCraft-Robotics/discussions/categories/llm-home-robots), [Physical Reasoning](https://github.com/microsoft/PromptCraft-Robotics/discussions/categories/llm-physical-reasoning), among many others.
@@ -46,7 +47,7 @@ The list below contains links to the different robotics categories and their cor
   * [ChatGPT - AirSim obstacle avoidance](examples/aerial_robotics/airsim_obstacleavoidance.md) | [Video Link](https://youtu.be/Vn6NapLlHPE)
 * Manipulation
   * [ChatGPT - Real robot: Picking, stacking, and building the MSFT logo](examples/manipulation/pick_stack_msft_logo.md) | [Video Link](https://youtu.be/wLOChUtdqoA)
-  * [ChatGPT - Manipulation tasks](examples/manipulation/manipulation_tasks.md)
+  * [ChatGPT - Manipulation tasks](examples/manipulation/manipulation_zeroshot.md)
 * Spatial-temporal reasoning
   * [ChatGPT - Visual servoing with basketball](examples/spatial_temporal_reasoning/visual_servoing_basketball.md)
 
