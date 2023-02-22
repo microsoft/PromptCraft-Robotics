@@ -1,6 +1,6 @@
 # PromptCraft-Robotics
 
-The PromptCraft-Robotics repository serves as a community for people to test and share interesting prompting examples for large language models (LLMs) within the robotics domain. We also provide a sample robotics simulator (built on Microsoft AirSim) with ChatGPT integration for users to get started.
+The PromptCraft-Robotics repository serves as a community for people to test and share interesting prompting examples for large language models (LLMs) within the robotics domain. We also provide a sample [robotics simulator](https://github.com/microsoft/PromptCraft-Robotics/tree/main/chatgpt_airsim) (built on Microsoft AirSim) with ChatGPT integration for users to get started.
 
 We currently focus on OpenAI's [ChatGPT](https://openai.com/blog/chatgpt/), but we also welcome examples from other LLMs (for example open-sourced models or others with API access such as [GPT-3](https://openai.com/api/) and Codex).
 
