@@ -69,7 +69,7 @@ This script uses the detect_ball function to detect the ball in the image captur
 
 The catch_ball function continuously gets images from the camera and calls the detect_ball function to detect the ball in the image. If the ball is detected, it calculates the velocity vx and vy to move towards the ball's location by dividing the difference between the ball's and robot's locations by 2. Then it calls the move_by_velocity function to move the robot towards the ball.
 
-This implementation uses a simple visual servoing approach where the robot moves towards the ball at a constant velocity. The velocity is proportional to the difference between the ball's and robot's locations, so the robot will move faster as it gets closer to the ball. You can adjust the gain (i.e., the multiplication factor of 0.5) to control the speed of the robot.
+This implementation uses a simple visual servoing approach where the robot moves towards the ball at a constant velocity. The velocity is proportional to the difference between the ball's and robot's locations, so the robot will move slower as it gets closer to the ball. You can adjust the gain (i.e., the multiplication factor of 0.5) to control the speed of the robot.
 
 ---------------------------------------------------------------------------
 
