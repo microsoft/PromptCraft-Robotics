@@ -1,4 +1,4 @@
-from revChatGPT.V1 import Chatbot
+import openai
 import re
 import argparse
 from airsim_wrapper import *
@@ -16,14 +16,27 @@ with open("config.json", "r") as f:
     config = json.load(f)
 
 print("Initializing ChatGPT...")
-chatgpt = Chatbot(config=config)
+openai.api_key = config["OPENAI_API_KEY"]
 
+chat_history = [{
+    "role": "system",
+    "content": "You are ChatGPT, a large language model trained by OpenAI. Answer as concisely as possible.",
+}]
 
 def ask(prompt):
-    for data in chatgpt.ask(prompt):
-        response = data["message"]
-
-    return response
+    chat_history.append({
+        "role": "user",
+        "content": prompt,
+    })
+    completion = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=chat_history,
+    )
+    chat_history.append({
+        "role": "assistant",
+        "content": completion.choices[0].message.content,
+    })
+    return chat_history[-1]["content"]
 
 
 print(f"Done.")

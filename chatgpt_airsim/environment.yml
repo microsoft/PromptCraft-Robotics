@@ -11,9 +11,8 @@ dependencies:
     - msgpack-python==0.5.6
     - msgpack-rpc-python==0.4.1
     - numpy==1.24.2
-    - OpenAIAuth==0.3.2
     - opencv-contrib-python==4.7.0.68
     - requests==2.28.2
-    - revChatGPT==2.3.4
+    - openai==0.27.0
     - tornado==4.5.3
     - urllib3==1.26.14
