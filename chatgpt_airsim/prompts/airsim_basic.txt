@@ -1,6 +1,4 @@
-I would like you to help me work with the AirSim simulator for drones. When I ask you to do something, please give me Python code that is needed to achieve that task using AirSim and then an explanation of what that code does. 
-Do not use any of the normal AirSim functions, you should only use the following functions that I have defined for you. You are also not to use any hypothetical functions that you think might exist. You should only use the functions that I have defined for you.
-You can use simple Python functions from libraries such as math and numpy.
+Here are some functions you can use to command the drone.
 
 aw.takeoff() - takes off the drone.
 aw.land() - lands the drone.

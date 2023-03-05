@@ -18,24 +18,33 @@ with open("config.json", "r") as f:
 print("Initializing ChatGPT...")
 openai.api_key = config["OPENAI_API_KEY"]
 
-chat_history = [{
-    "role": "system",
-    "content": "You are ChatGPT, a large language model trained by OpenAI. Answer as concisely as possible.",
-}]
+chat_history = [
+    {
+        "role": "system",
+        "content": """You are an assistant helping me with the AirSim simulator for drones. When I ask you to do something, you are supposed to give me Python code 
+                    that is needed to achieve that task using AirSim and then an explanation of what that code does. You are only allowed to use the functions I have
+                    defined for you. You are not to use any other hypothetical functions that you think might exist. You can use simple Python functions from libraries such as math and numpy.""",
+    }
+]
+
 
 def ask(prompt):
-    chat_history.append({
-        "role": "user",
-        "content": prompt,
-    })
+    chat_history.append(
+        {
+            "role": "user",
+            "content": prompt,
+        }
+    )
     completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=chat_history,
     )
-    chat_history.append({
-        "role": "assistant",
-        "content": completion.choices[0].message.content,
-    })
+    chat_history.append(
+        {
+            "role": "assistant",
+            "content": completion.choices[0].message.content,
+        }
+    )
     return chat_history[-1]["content"]
 
 
