@@ -10,6 +10,7 @@ import time
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--prompt", type=str, default="prompts/airsim_basic.txt")
+parser.add_argument("--sysprompt", type=str, default="system_prompts/airsim_basic.txt")
 args = parser.parse_args()
 
 with open("config.json", "r") as f:
@@ -18,12 +19,13 @@ with open("config.json", "r") as f:
 print("Initializing ChatGPT...")
 openai.api_key = config["OPENAI_API_KEY"]
 
+with open(args.sysprompt, "r") as f:
+    sysprompt = f.read()
+
 chat_history = [
     {
         "role": "system",
-        "content": """You are an assistant helping me with the AirSim simulator for drones. When I ask you to do something, you are supposed to give me Python code 
-                    that is needed to achieve that task using AirSim and then an explanation of what that code does. You are only allowed to use the functions I have
-                    defined for you. You are not to use any other hypothetical functions that you think might exist. You can use simple Python functions from libraries such as math and numpy.""",
+        "content": sysprompt
     }
 ]
 
