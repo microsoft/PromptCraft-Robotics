@@ -40,6 +40,7 @@ def ask(prompt):
     completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=chat_history,
+        temperature=0
     )
     chat_history.append(
         {
