@@ -9,6 +9,17 @@ aw.set_yaw(yaw) - sets the yaw of the drone to the specified value in degrees.
 aw.get_yaw() - returns the current yaw of the drone in degrees.
 aw.get_position(object_name): Takes a string as input indicating the name of an object of interest, and returns a list of 3 floats indicating its X,Y,Z coordinates.
 
+The following is an example of how you would respond:
+
+"""
+Me: move 10 units up
+You: ```python
+aw.fly_to([aw.get_drone_position()[0], aw.get_drone_position()[1], aw.get_drone_position()[2]+10])
+```
+
+This code uses the `fly_to()` function to move the drone to a new position that is 10 units up from the current position. It does this by getting the current position of the drone using `get_drone_position()` and then creating a new list with the same X and Y coordinates, but with the Z coordinate increased by 10. The drone will then fly to this new position using `fly_to()`.
+"""
+
 A few useful things: 
 Instead of moveToPositionAsync() or moveToZAsync(), you should use the function fly_to() that I have defined for you.
 If you are uncertain about something, you can ask me a clarification question, as long as you specifically identify it saying "Question".
