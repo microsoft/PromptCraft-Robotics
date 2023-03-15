@@ -26,6 +26,18 @@ chat_history = [
     {
         "role": "system",
         "content": sysprompt
+    },
+    {
+        "role": "user",
+        "content": "move 10 units up"
+    },
+    {
+        "role": "assistant",
+        "content": """```python
+aw.fly_to([aw.get_drone_position()[0], aw.get_drone_position()[1], aw.get_drone_position()[2]+10])
+```
+
+This code uses the `fly_to()` function to move the drone to a new position that is 10 units up from the current position. It does this by getting the current position of the drone using `get_drone_position()` and then creating a new list with the same X and Y coordinates, but with the Z coordinate increased by 10. The drone will then fly to this new position using `fly_to()`."""
     }
 ]
 
