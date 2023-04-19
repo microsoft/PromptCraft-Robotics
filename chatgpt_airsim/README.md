@@ -7,7 +7,7 @@ These scripts allow users to interact with and command a drone inside a [Microso
 For details on how to use AirSim and its original API, please visit the [AirSim documentation](https://microsoft.github.io/AirSim/).
 
 ## Getting started (Windows only - for now)
-- As a prerequisite, you need to create an OpenAI account the allows access ChatGPT through the OpenAI API. You can do so by visiting https://platform.openai.com and signing up for an account.
+- As a prerequisite, you need to create an OpenAI account that allows access to ChatGPT through the OpenAI API. You can do so by visiting https://platform.openai.com and signing up for an account.
 - Set up the conda environment  
 ```
 conda env create -f environment.yml
