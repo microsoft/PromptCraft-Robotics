@@ -1,0 +1,225 @@
+<sdf version='1.7'>
+  <model name='sjtu_drone'>
+    <link name='base_link'>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>1.477</mass>
+        <inertia>
+          <ixx>0.1152</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.1152</iyy>
+          <iyz>0</iyz>
+          <izz>0.218</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_link_fixed_joint_lump__sjtu_drone_collision_collision'>
+        <pose>0 0 0.04 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://sjtu_drone/quadrotor_4.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='base_link_fixed_joint_lump__sjtu_drone_visual_visual'>
+        <pose>0 0 0.04 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+              <uri>model://sjtu_drone/quadrotor_4.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <sensor name='sensor_imu' type='imu'>
+        <always_on>1</always_on>
+        <visualize>1</visualize>
+        <update_rate>100</update_rate>
+        <pose>0 0 0 0 -0 0</pose>
+        <plugin name='imu' filename='libgazebo_ros_imu_sensor.so'>
+          <ros>
+            <namespace>/sjtu_drone</namespace>
+          </ros>
+          <initial_orientation_as_reference>0</initial_orientation_as_reference>
+        </plugin>
+        <imu>
+          <noise>
+            <type>gaussian</type>
+            <rate>
+              <mean>0</mean>
+              <stddev>0</stddev>
+            </rate>
+            <accel>
+              <mean>0</mean>
+              <stddev>0.00</stddev>
+            </accel>
+          </noise>
+        </imu>
+      </sensor>
+      <sensor name='gps' type='gps'>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <gps>
+          <position_sensing>
+            <horizontal>
+              <noise type='gaussian'>
+                <mean>0</mean>
+                <stddev>0.0002</stddev>
+              </noise>
+            </horizontal>
+            <vertical>
+              <noise type='gaussian'>
+                <mean>0</mean>
+                <stddev>0.0002</stddev>
+              </noise>
+            </vertical>
+          </position_sensing>
+        </gps>
+        <plugin name='gps' filename='libgazebo_ros_gps_sensor.so'>
+          <ros>
+            <namespace>/sjtu_drone/gps</namespace>
+            <remapping>~/out:=data</remapping>
+          </ros>
+        </plugin>
+      </sensor>
+      <sensor name='down_camera' type='camera'>
+        <camera>
+          <horizontal_fov>1.047</horizontal_fov>
+          <image>
+            <width>640</width>
+            <height>360</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>100</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0</mean>
+            <stddev>0.005</stddev>
+          </noise>
+        </camera>
+        <always_on>1</always_on>
+        <update_rate>15</update_rate>
+        <visualize>1</visualize>
+        <plugin name='camera_bottom' filename='libgazebo_ros_camera.so'>
+          <ros>
+            <namespace>/sjtu_drone</namespace>
+            <remapping>image_raw:=camera_bottom</remapping>
+            <remapping>camera_info:=camera_bottom_info</remapping>
+          </ros>
+          <camera_name>bottom</camera_name>
+          <frame_name>bottom_cam_link</frame_name>
+          <hack_baseline>0.07</hack_baseline>
+        </plugin>
+        <pose>0 0 0 3.14159 1.57079 3.14159</pose>
+      </sensor>
+      <sensor name='front_camera' type='camera'>
+        <camera>
+          <horizontal_fov>2.09</horizontal_fov>
+          <image>
+            <width>640</width>
+            <height>360</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>100</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0</mean>
+            <stddev>0.005</stddev>
+          </noise>
+        </camera>
+        <always_on>1</always_on>
+        <update_rate>60</update_rate>
+        <visualize>1</visualize>
+        <plugin name='camera_front' filename='libgazebo_ros_camera.so'>
+          <ros>
+            <namespace>/sjtu_drone</namespace>
+            <remapping>image_raw:=camera_front</remapping>
+            <remapping>camera_info:=camera_front_info</remapping>
+          </ros>
+          <camera_name>front</camera_name>
+          <frame_name>front_cam_link</frame_name>
+          <hack_baseline>0.07</hack_baseline>
+        </plugin>
+        <pose>0.2 0 0 0 -0 0</pose>
+      </sensor>
+      <sensor name='sonar' type='ray'>
+        <always_on>1</always_on>
+        <visualize>1</visualize>
+        <update_rate>5</update_rate>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>5</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.12</min_angle>
+              <max_angle>0.12</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>5</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.12</min_angle>
+              <max_angle>0.12</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.02</min>
+            <max>10</max>
+            <resolution>0.01</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0</mean>
+            <stddev>0.01</stddev>
+          </noise>
+        </ray>
+        <plugin name='sonar' filename='libgazebo_ros_ray_sensor.so'>
+          <ros>
+            <namespace>/sjtu_drone</namespace>
+            <remapping>~/out:=sonar</remapping>
+          </ros>
+          <output_type>sensor_msgs/Range</output_type>
+          <radiation_type>ultrasound</radiation_type>
+          <frame_name>sonar_link</frame_name>
+        </plugin>
+        <pose>0 0 0 3.14159 1.57079 3.14159</pose>
+      </sensor>
+    </link>
+    <static>0</static>
+    <plugin name='simple_drone' filename='libplugin_drone.so'>
+      <bodyName>base_link</bodyName>
+      <rosNamespace>drone</rosNamespace>
+      <imuTopic>imu</imuTopic>
+      <rollpitchProportionalGain>10.0</rollpitchProportionalGain>
+      <rollpitchDifferentialGain>5.0</rollpitchDifferentialGain>
+      <rollpitchLimit>0.5</rollpitchLimit>
+      <yawProportionalGain>2.0</yawProportionalGain>
+      <yawDifferentialGain>1.0</yawDifferentialGain>
+      <yawLimit>1.5</yawLimit>
+      <velocityXYProportionalGain>5.0</velocityXYProportionalGain>
+      <velocityXYDifferentialGain>2.3</velocityXYDifferentialGain>
+      <velocityXYLimit>2</velocityXYLimit>
+      <velocityZProportionalGain>5.0</velocityZProportionalGain>
+      <velocityZIntegralGain>0.0</velocityZIntegralGain>
+      <velocityZDifferentialGain>1.0</velocityZDifferentialGain>
+      <velocityZLimit>-1</velocityZLimit>
+      <positionXYProportionalGain>1.1</positionXYProportionalGain>
+      <positionXYDifferentialGain>0.0</positionXYDifferentialGain>
+      <positionXYIntegralGain>0.0</positionXYIntegralGain>
+      <positionXYLimit>5</positionXYLimit>
+      <positionZProportionalGain>1.0</positionZProportionalGain>
+      <positionZDifferentialGain>0.2</positionZDifferentialGain>
+      <positionZIntegralGain>0.0</positionZIntegralGain>
+      <positionZLimit>-1</positionZLimit>
+      <maxForce>30</maxForce>
+      <motionSmallNoise>0.05</motionSmallNoise>
+      <motionDriftNoise>0.03</motionDriftNoise>
+      <motionDriftNoiseTime>5.0</motionDriftNoiseTime>
+    </plugin>
+  </model>
+</sdf>

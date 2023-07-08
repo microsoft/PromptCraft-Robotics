@@ -1,0 +1,22 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "",
+        "limitSymbolsToIncludedHeaders": true
+      },
+      "includePath": [
+        "/home/georg/catkin_ws/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/georg/catkin_ws/src/LMD/follow_human/include/**",
+        "/home/georg/catkin_ws/src/LMD/LIO-SAM/include/**",
+        "/home/georg/catkin_ws/src/LMD/robot_control/include/**",
+        "/home/georg/catkin_ws/src/LMD/robot_simulation/include/**",
+        "/home/georg/catkin_ws/src/rl_course_files/parrot_ardrone/sjtu_drone/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS"
+    }
+  ],
+  "version": 4
+}
