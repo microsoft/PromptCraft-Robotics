@@ -242,10 +242,11 @@ class AirSimWrapper:
 
     # Complex commands 
     def count(self, object_name):
-        image_data = take_photo()
+        filename = "count" + object_name + ".jpg"
+        image_data = take_photo(filename)
         vision_outputs = analyze_with_vision_model(image_data)
         # Naive: converts vision model json output to string, append to count prompt
-        prompt = "\n Based on this json output, count the number of instances of " + object_name + ". Return a single number"
+        prompt = "\n Based on this json output, count the number of instances of " + object_name + " in the scene. Return a single number"
         return query_language_model(str(vision_outputs) + prompt)
     
     def search(self, object_name, radius):
@@ -253,9 +254,15 @@ class AirSimWrapper:
         fly_to(get_position(object_name))
         # fly in a circle
         circular_path = generate_circular_path(get_position(object_name)[:2], radius, get_position(object_name)[2])
-        fly_path(circular_path)
-        # analyze with vision model
-        analyze_with_vision_model()
+        vision_outputs = []
+        for point in circular path:
+            fly_to(point)
+            image_data = take_photo(str(point))
+            vision_output = analyze_with_vision_model(image_data)
+            vision_outputs.append(vision_output)
+        prompt = "\n Based on these json outputs, is " + object_name + "present in the scene? Return TRUE or FALSE."
+        return query_language_model(str(vision_outputs) + prompt)
+        
 
     def get_latitude_longitude(self):
         return (get_drone_position()[0], get_drone_position()[1])
