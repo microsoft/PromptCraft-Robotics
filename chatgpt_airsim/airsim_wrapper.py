@@ -264,5 +264,6 @@ class AirSimWrapper:
         return query_language_model(str(vision_outputs) + prompt)
         
 
-    def get_latitude_longitude(self):
-        return (get_drone_position()[0], get_drone_position()[1])
+    def get_latitude_longitude(self, object_name):
+        fly_to(get_position(object_name))
+        return (get_position(object_name)[0], get_drone_position(object_name)[1])
