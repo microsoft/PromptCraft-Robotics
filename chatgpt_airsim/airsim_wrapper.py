@@ -1,16 +1,16 @@
 import base64
 import json
 import math
+import os
 import random
 import threading
 import time
 
 import airsim
+import cv2
 import numpy as np
 import openai
 import requests
-from airsim import Client, ImageRequest, ImageType
-# from google.cloud import vision # removed for now because it's causing dependency bugs
 
 objects_dict = {
     "turbine1": "BP_Wind_Turbines_C_1",
@@ -139,22 +139,39 @@ class AirSimWrapper:
         if self.flutter_thread is not None:
             self.flutter_thread.join()
 
-    def take_photo(client: Client, vehicle_name: str):
-        request = ImageRequest("0", ImageType.scene, False, False)
-        response = client.simGetImages([request], vehicle_name)
+    def take_photo(self, filename):
+        responses = self.client.simGetImages(
+            [airsim.ImageRequest("0", airsim.ImageType.Scene, False, False)]
+        )
+        response = responses[0]
 
-        if response:
-            image_response = response[0]
+        # get numpy array
+        img1d = np.fromstring(response.image_data_uint8, dtype=np.uint8)
 
-            image_response = base64.b64encode(image_response).decode("utf-8")
+        # reshape array to 3 channel image array H X W X 3
+        img_rgb = img1d.reshape(response.height, response.width, 3)
 
-            return image_response.image_data_uint8
+        # original image is flipped vertically
+        img_rgb = np.flipud(img_rgb)
 
-    def analyze_with_vision_model(image_data):
+        # write to png
+        filename = os.path.normpath(filename + ".png")
+        cv2.imwrite(filename, img_rgb)
+
+        # encode image to base64 string
+        with open(filename, "rb") as image_file:
+            base64_image = base64.b64encode(image_file.read()).decode("utf-8")
+
+        return base64_image
+
+    def analyze_with_vision_model(self, image_data):
         # Load API key from config.json
         with open("config.json") as f:
             data = json.load(f)
-            api_key = data["API_key"]
+            api_key = data["OPENAI_API_KEY"]
+
+        if isinstance(image_data, str):
+            image_data = image_data.encode()
 
         # Convert image data to base64
         base64_image = base64.b64encode(image_data).decode("utf-8")
@@ -227,6 +244,6 @@ class AirSimWrapper:
         # fly in a circle
         # analyze with vision model
         analyze_with_vision_model()
-    
+
     def get_latitude_longitude(self):
         return (get_drone_position()[0], get_drone_position()[1])
