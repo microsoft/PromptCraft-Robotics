@@ -19,9 +19,14 @@
 
 ### 5. Multiple drones/objects
 - Multiple drones swarming to one object at once. 
-- Detect multiple objects 
+- Detect multiple objects
+- Not just turbines and people (try other objects)
 
+### 6. New environment 
+- Switch out the environment
 
-
+## Interesting Tasks: 
+- Counting tasks
+- Following objects 
 
 
