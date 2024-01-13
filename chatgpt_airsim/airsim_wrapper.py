@@ -137,7 +137,7 @@ class AirSimWrapper:
         if self.flutter_thread is not None:
             self.flutter_thread.join()
 
-    def take_photo():
+    def take_photo(self):
         client = airsim.MultirotorClient()
         png_image = client.simGetImage("0", airsim.ImageType.Scene)
 
@@ -145,7 +145,7 @@ class AirSimWrapper:
 
         return base64_image
 
-    def analyze_with_vision_model(image_data):
+    def analyze_with_vision_model(self, image_data):
         # Load API key from config.json
         with open("config.json") as f:
             data = json.load(f)
