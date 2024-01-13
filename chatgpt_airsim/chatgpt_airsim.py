@@ -107,11 +107,6 @@ while True:
 
     response = ask(question)
 
-    if "count" in question:
-        vision_outputs = analyze_with_vision_model(image_data)
-        # Naive: converts vision model json output to string, append to count question
-        response = ask(str(vision_outputs) + question)
-
     print(f"\n{response}\n")
 
     code = extract_python_code(response)

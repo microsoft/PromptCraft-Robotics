@@ -190,8 +190,7 @@ class AirSimWrapper:
         # Return the response
         return response.json()
 
-        # Google Vision API
-        # @Kaien: take an image function
+        # Google Vision API: https://cloud.google.com/vision/docs/object-localizer
         # path = "path to image"
         # client = vision.ImageAnnotatorClient()
 
@@ -200,3 +199,19 @@ class AirSimWrapper:
         # image = vision.Image(content=content)
 
         # objects = client.object_localization(image=image).localized_object_annotations
+
+    def count(self):
+        image_data = take_photo()
+        vision_outputs = analyze_with_vision_model(image_data)
+        # Naive: converts vision model json output to string, append to count question
+        response = ask(str(vision_outputs) + question)
+    
+    def search(self, object_name):
+        # code motion
+        fly_to(get_position(object_name))
+        # fly in a circle
+        # analyze with vision model
+        analyze_with_vision_model()
+    
+    def get_latitude_longitude(self):
+        return (get_drone_position()[0], get_drone_position()[1])
