@@ -228,6 +228,8 @@ class AirSimWrapper:
         # objects = client.object_localization(image=image).localized_object_annotations
 
     def query_language_model(prompt):
+        with open("config.json", "r") as f:
+            config = json.load(f)
         openai.api_key = config["OPENAI_API_KEY"]
         chat_history = [
             {
@@ -243,36 +245,41 @@ class AirSimWrapper:
     # Complex commands
     def count(self, object_name):
         filename = "count" + object_name + ".jpg"
-        image_data = take_photo(filename)
-        vision_outputs = analyze_with_vision_model(image_data)
+        image_data = self.take_photo(filename)
+        vision_outputs = self.analyze_with_vision_model(image_data)
         # Naive: converts vision model json output to string, append to count prompt
         prompt = (
             "\n Based on this json output, count the number of instances of "
             + object_name
             + " in the scene. Return a single number"
         )
-        return query_language_model(str(vision_outputs) + prompt)
+        return self.query_language_model(str(vision_outputs) + prompt)
 
     def search(self, object_name, radius):
         # code motion
-        fly_to(get_position(object_name))
+        self.fly_to(self.get_position(object_name))
         # fly in a circle
-        circular_path = generate_circular_path(
-            get_position(object_name)[:2], radius, get_position(object_name)[2]
+        circular_path = self.generate_circular_path(
+            self.get_position(object_name)[:2],
+            radius,
+            self.get_position(object_name)[2],
         )
         vision_outputs = []
         for point in circular_path:
-            fly_to(point)
-            image_data = take_photo(str(point))
-            vision_output = analyze_with_vision_model(image_data)
+            self.fly_to(point)
+            image_data = self.take_photo(str(point))
+            vision_output = self.analyze_with_vision_model(image_data)
             vision_outputs.append(vision_output)
         prompt = (
             "\n Based on these json outputs, is "
             + object_name
             + "present in the scene? Return TRUE or FALSE."
         )
-        return query_language_model(str(vision_outputs) + prompt)
+        return self.query_language_model(str(vision_outputs) + prompt)
 
     def get_latitude_longitude(self, object_name):
-        fly_to(get_position(object_name))
-        return (get_position(object_name)[0], get_drone_position(object_name)[1])
+        self.fly_to(self.get_position(object_name))
+        return (
+            self.get_position(object_name)[0],
+            self.get_drone_position(object_name)[1],
+        )
