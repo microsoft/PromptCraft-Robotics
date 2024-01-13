@@ -24,6 +24,7 @@ class AirSimWrapper:
         self.client.confirmConnection()
         self.client.enableApiControl(True)
         self.client.armDisarm(True)
+        self.stop_thread = False
 
     def takeoff(self):
         self.client.takeoffAsync().join()
@@ -97,8 +98,8 @@ class AirSimWrapper:
             yaw = random.uniform(-1, 1)  # Rotate
 
             # Move the drone in the proposed direction
-            self.client.moveByAngleThrottleAsync(
-                pitch, roll, 0.5, yaw, change_interval
+            self.client.moveByRollPitchYawrateThrottleAsync(
+                roll, pitch, yaw, 0.5, change_interval
             ).join()
 
             # Get the current position

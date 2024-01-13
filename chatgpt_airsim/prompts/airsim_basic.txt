@@ -9,6 +9,8 @@ aw.set_yaw(yaw) - sets the yaw of the drone to the specified value in degrees.
 aw.get_yaw() - returns the current yaw of the drone in degrees.
 aw.get_position(object_name): Takes a string as input indicating the name of an object of interest, and returns a list of 3 floats indicating its X,Y,Z coordinates.
 aw.flutter(): The drone keeps moving in a 'random' way within a confined radius. 
+aw.start_fluttering(): The drone starts fluttering
+aw.stop_fluttering(): The drone stops fluttering
 
 A few useful things: 
 Instead of moveToPositionAsync() or moveToZAsync(), you should use the function fly_to() that I have defined for you.
