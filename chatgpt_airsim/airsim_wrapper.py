@@ -1,5 +1,9 @@
-import airsim
 import math
+import random
+import threading
+import time
+
+import airsim
 import numpy as np
 
 objects_dict = {
@@ -44,7 +48,15 @@ class AirSimWrapper:
                 airsim_points.append(airsim.Vector3r(point[0], point[1], -point[2]))
             else:
                 airsim_points.append(airsim.Vector3r(point[0], point[1], point[2]))
-        self.client.moveOnPathAsync(airsim_points, 5, 120, airsim.DrivetrainType.ForwardOnly, airsim.YawMode(False, 0), 20, 1).join()
+        self.client.moveOnPathAsync(
+            airsim_points,
+            5,
+            120,
+            airsim.DrivetrainType.ForwardOnly,
+            airsim.YawMode(False, 0),
+            20,
+            1,
+        ).join()
 
     def set_yaw(self, yaw):
         self.client.rotateToYawAsync(yaw, 5).join()
@@ -61,3 +73,60 @@ class AirSimWrapper:
             object_names_ue = self.client.simListSceneObjects(query_string)
         pose = self.client.simGetObjectPose(object_names_ue[0])
         return [pose.position.x_val, pose.position.y_val, pose.position.z_val]
+
+    @staticmethod
+    def is_within_boundary(start_pos, current_pos, limit_radius):
+        """Check if the drone is within the spherical boundary"""
+        distance = math.sqrt(
+            (current_pos.x_val - start_pos.x_val) ** 2
+            + (current_pos.y_val - start_pos.y_val) ** 2
+            + (current_pos.z_val - start_pos.z_val) ** 2
+        )
+        return distance <= limit_radius
+
+    def flutter(self, speed=5, change_interval=1, limit_radius=10):
+        """Simulate Brownian motion /fluttering with the drone"""
+        # Takeoff and get initial position
+        self.client.takeoffAsync().join()
+        start_position = self.client.simGetVehiclePose().position
+
+        while not self.stop_thread:
+            # Propose a random direction
+            pitch = random.uniform(-1, 1)  # Forward/backward
+            roll = random.uniform(-1, 1)  # Left/right
+            yaw = random.uniform(-1, 1)  # Rotate
+
+            # Move the drone in the proposed direction
+            self.client.moveByAngleThrottleAsync(
+                pitch, roll, 0.5, yaw, change_interval
+            ).join()
+
+            # Get the current position
+            current_position = self.client.simGetVehiclePose().position
+
+            # Check if the drone is within the boundary
+            if not self.is_within_boundary(
+                start_position, current_position, limit_radius
+            ):
+                # If outside the boundary, adjust to a new random direction
+                self.client.moveToPositionAsync(
+                    start_position.x_val,
+                    start_position.y_val,
+                    start_position.z_val,
+                    speed,
+                ).join()
+
+            # Wait for the next change
+            time.sleep(change_interval)
+
+    def start_fluttering(self, speed=5, change_interval=1, limit_radius=10):
+        self.stop_thread = False
+        self.flutter_thread = threading.Thread(
+            target=self.flutter, args=(speed, change_interval, limit_radius)
+        )
+        self.flutter_thread.start()
+
+    def stop_fluttering(self):
+        self.stop_thread = True
+        if self.flutter_thread is not None:
+            self.flutter_thread.join()
