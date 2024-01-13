@@ -10,6 +10,7 @@ import numpy as np
 import openai
 import requests
 from airsim import Client, ImageRequest, ImageType
+# from google.cloud import vision # removed for now because it's causing dependency bugs
 
 objects_dict = {
     "turbine1": "BP_Wind_Turbines_C_1",
@@ -188,3 +189,14 @@ class AirSimWrapper:
 
         # Return the response
         return response.json()
+
+        # Google Vision API
+        # @Kaien: take an image function
+        # path = "path to image"
+        # client = vision.ImageAnnotatorClient()
+
+        # with open(path, "rb") as image_file:
+        #     content = image_file.read()
+        # image = vision.Image(content=content)
+
+        # objects = client.object_localization(image=image).localized_object_annotations

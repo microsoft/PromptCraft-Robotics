@@ -10,8 +10,6 @@ import openai
 import requests
 from airsim_wrapper import *
 
-# from google.cloud import vision # removed for now because it's causing dependency bugs
-
 parser = argparse.ArgumentParser()
 parser.add_argument("--prompt", type=str, default="prompts/airsim_basic.txt")
 parser.add_argument("--sysprompt", type=str, default="system_prompts/airsim_basic.txt")
@@ -110,19 +108,9 @@ while True:
     response = ask(question)
 
     if "count" in question:
-        # @Kaien: take an image function
-        path = "path to image"
-        client = vision.ImageAnnotatorClient()
-
-        with open(path, "rb") as image_file:
-            content = image_file.read()
-        image = vision.Image(content=content)
-
-        objects = client.object_localization(image=image).localized_object_annotations
-
-        # convert objects to string
-        # add the question with count in it
-        response = ask(string_json + question)
+        vision_outputs = analyze_with_vision_model(image_data)
+        # Naive: converts vision model json output to string, append to count question
+        response = ask(str(vision_outputs) + question)
 
     print(f"\n{response}\n")
 
