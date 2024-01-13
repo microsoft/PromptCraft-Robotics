@@ -149,7 +149,7 @@ class AirSimWrapper:
         # Load API key from config.json
         with open("config.json") as f:
             data = json.load(f)
-            api_key = data["API_key"]
+            api_key = data["OPENAI_API_KEY"]
 
         # Convert image data to base64
         base64_image = base64.b64encode(image_data).decode("utf-8")
