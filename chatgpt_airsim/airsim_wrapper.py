@@ -43,15 +43,6 @@ class AirSimWrapper:
         pose = self.client.simGetVehiclePose()
         return [pose.position.x_val, pose.position.y_val, pose.position.z_val]
 
-    # def set_pitch(self, pitch, duration=1):
-    #     roll = 0
-    #     yaw = 0
-    #     throttle = 0
-
-    #     self.client.moveByRollPitchYawrateThrottleAsync(
-    #         roll, pitch, yaw, throttle, duration
-    #     ).join()
-
     def fly_to(self, point):
         if point[2] > 0:
             self.client.moveToPositionAsync(point[0], point[1], -point[2], 5).join()
