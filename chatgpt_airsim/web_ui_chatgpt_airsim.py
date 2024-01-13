@@ -25,6 +25,24 @@ def index():
 
 @app.route("/ask", methods=["POST"])
 def web_ask():
+    def ask(prompt):
+        chat_history.append(
+            {
+                "role": "user",
+                "content": prompt,
+            }
+        )
+        completion = openai.ChatCompletion.create(
+            model="gpt-4", messages=chat_history, temperature=0
+        )
+        chat_history.append(
+            {
+                "role": "assistant",
+                "content": completion.choices[0].message.content,
+            }
+        )
+        return chat_history[-1]["content"]
+
     user_input = request.json.get("question")
     if user_input:
         response = ask(user_input)
@@ -56,25 +74,6 @@ aw.fly_to([aw.get_drone_position()[0], aw.get_drone_position()[1], aw.get_drone_
 This code uses the `fly_to()` function to move the drone to a new position that is 10 units up from the current position. It does this by getting the current position of the drone using `get_drone_position()` and then creating a new list with the same X and Y coordinates, but with the Z coordinate increased by 10. The drone will then fly to this new position using `fly_to()`.""",
     },
 ]
-
-
-def ask(prompt):
-    chat_history.append(
-        {
-            "role": "user",
-            "content": prompt,
-        }
-    )
-    completion = openai.ChatCompletion.create(
-        model="gpt-4", messages=chat_history, temperature=0
-    )
-    chat_history.append(
-        {
-            "role": "assistant",
-            "content": completion.choices[0].message.content,
-        }
-    )
-    return chat_history[-1]["content"]
 
 
 print(f"Done.")
