@@ -123,8 +123,10 @@ while True:
         image = vision.Image(content=content)
 
         objects = client.object_localization(image=image).localized_object_annotations
-
-        response = "Number of objects found: {len(objects)}"
+        
+        # convert objects to string
+        # add the question with count in it
+        response = ask(string_json + question)
 
     print(f"\n{response}\n")
 
