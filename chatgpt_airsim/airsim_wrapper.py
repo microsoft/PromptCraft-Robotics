@@ -199,12 +199,27 @@ class AirSimWrapper:
         # image = vision.Image(content=content)
 
         # objects = client.object_localization(image=image).localized_object_annotations
+    
+    def query_language_model(prompt):
+        openai.api_key = config["OPENAI_API_KEY"]
+        chat_history = [
+            {
+                "role": "user",
+                "content": prompt,
+            }
+        ]
+        completion = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo", messages=chat_history, temperature=0
+        )
+        return completion.choices[0].message.content
 
-    def count(self):
+    # Complex commands 
+    def count(self, object_name):
         image_data = take_photo()
         vision_outputs = analyze_with_vision_model(image_data)
-        # Naive: converts vision model json output to string, append to count question
-        response = ask(str(vision_outputs) + question)
+        # Naive: converts vision model json output to string, append to count prompt
+        prompt = "\n Based on this json output, count the number of instances of " + object_name + ". Return a single number"
+        return query_language_model(str(vision_outputs) + prompt)
     
     def search(self, object_name):
         # code motion
