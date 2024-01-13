@@ -12,7 +12,7 @@ aw.flutter(): The drone keeps moving in a 'random' way within a confined radius.
 aw.start_fluttering(): The drone starts fluttering
 aw.stop_fluttering(): The drone stops fluttering
 aw.take_photo(): The drone takes a photo of what it sees in FPV. 
-aw.analyze_with_vision_model(): The drone use the photo from take_photo() to analyze the image. 
+aw.analyze_with_vision_model(image_data): The drone use the photo from take_photo() to analyze the image, where image_data is passed in from take_photo
 
 A few useful things: 
 Instead of moveToPositionAsync() or moveToZAsync(), you should use the function fly_to() that I have defined for you.
