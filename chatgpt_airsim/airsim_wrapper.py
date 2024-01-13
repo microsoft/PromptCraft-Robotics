@@ -9,8 +9,6 @@ import airsim
 import numpy as np
 import openai
 import requests
-from airsim import Client, ImageRequest, ImageType
-# from google.cloud import vision # removed for now because it's causing dependency bugs
 
 objects_dict = {
     "turbine1": "BP_Wind_Turbines_C_1",
@@ -139,16 +137,13 @@ class AirSimWrapper:
         if self.flutter_thread is not None:
             self.flutter_thread.join()
 
-    def take_photo(client: Client, vehicle_name: str):
-        request = ImageRequest("0", ImageType.scene, False, False)
-        response = client.simGetImages([request], vehicle_name)
+    def take_photo():
+        client = airsim.MultirotorClient()
+        png_image = client.simGetImage("0", airsim.ImageType.Scene)
 
-        if response:
-            image_response = response[0]
+        base64_image = base64.b64encode(png_image).decode("utf-8")
 
-            image_response = base64.b64encode(image_response).decode("utf-8")
-
-            return image_response.image_data_uint8
+        return base64_image
 
     def analyze_with_vision_model(image_data):
         # Load API key from config.json
@@ -205,13 +200,13 @@ class AirSimWrapper:
         vision_outputs = analyze_with_vision_model(image_data)
         # Naive: converts vision model json output to string, append to count question
         response = ask(str(vision_outputs) + question)
-    
+
     def search(self, object_name):
         # code motion
         fly_to(get_position(object_name))
         # fly in a circle
         # analyze with vision model
         analyze_with_vision_model()
-    
+
     def get_latitude_longitude(self):
         return (get_drone_position()[0], get_drone_position()[1])
