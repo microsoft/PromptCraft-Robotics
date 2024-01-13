@@ -138,6 +138,16 @@ class AirSimWrapper:
         self.stop_thread = True
         if self.flutter_thread is not None:
             self.flutter_thread.join()
+    
+    def generate_circular_path(center, radius, height, segments=12):
+        path = []
+        for i in range(segments):
+            angle = 2 * math.pi * i/segments
+            x = center[0] + radius * math.cos(angle)
+            y = center[1] + radius * math.sin(angle)
+            z = height
+            path.append(x, y, z)
+        return path
 
     def take_photo(self, filename):
         responses = self.client.simGetImages(
@@ -238,10 +248,12 @@ class AirSimWrapper:
         prompt = "\n Based on this json output, count the number of instances of " + object_name + ". Return a single number"
         return query_language_model(str(vision_outputs) + prompt)
     
-    def search(self, object_name):
+    def search(self, object_name, radius):
         # code motion
         fly_to(get_position(object_name))
         # fly in a circle
+        circular_path = generate_circular_path(get_position(object_name)[:2], radius, get_position(object_name)[2])
+        fly_path(circular_path)
         # analyze with vision model
         analyze_with_vision_model()
 
