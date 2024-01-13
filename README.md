@@ -7,6 +7,7 @@
 
 ### 2. Try different GPTs
 - Run different versions of GPTs rather than 3.5 turbo commands (like GPT-4)
+- 4 is solid, but for testing we will use 3.5 
 
 ### 3. Try vision models
 - Take photo the drone takes and then process that into answering certain instruction based questions like GPT-4
