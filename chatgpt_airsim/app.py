@@ -8,6 +8,7 @@ app = Flask(__name__)
 
 with open("config.json", "r") as f:
     config = json.load(f)
+openai.api_key = config["OPENAI_API_KEY"]
 with open("system_prompts/airsim_basic.txt", "r") as f:
     sysprompt = f.read()
 chat_history = [
