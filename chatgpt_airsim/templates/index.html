@@ -1,61 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>AirSim Chatbot UI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AirSim Chatbot Web App</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column; /* Align items vertically */
+            justify-content: center;
+            height: 100vh;
         }
 
-        #container {
-            width: 600px;
-            margin: 20px auto;
+        #header {
+            margin-top: 20px;
+            text-align: center;
+            margin-bottom: 20px;
         }
 
-        #output {
-            height: 300px;
-            border: 1px solid #ccc;
-            margin-bottom: 10px;
+        #subheader {
+            text-align: center;
+            font-size: smaller;
+            font-style: italic;
+            margin-bottom: 20px; /* Add margin at the bottom */
+        }
+
+        #drone-image {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px; /* Add margin for spacing */
+            width: 25%;
+        }
+    
+        #chat-container {
+            flex-grow: 1; /* Take up available space */
+            padding: 20px;
+            max-height: 80vh; /* Adjust as per your preference */
+            overflow-y: auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin: 10px;
+        }
+    
+        input[type="text"] {
+            width: calc(100% - 40px);
             padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin: 10px;
+            text-align: center;
         }
 
-        #chatbox {
-            height: 50px;
+        pre {
+            background-color: #f3f3f3;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        button {
+            width: calc(100% - 40px);
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px;
+        }
+    
+        button:hover {
+            background-color: #0056b3;
         }
     </style>
+    
+    
 </head>
-
 <body>
-    <div id="container">
-        <div id="output"></div>
-        <input type="text" id="chatbox" placeholder="Type your question...">
-        <button onclick="sendQuestion()">Send</button>
+    <div id="header">
+        <h1 style="color: #333; font-weight: bold; margin: 0;">Flutter</h1>
+        <div id="subheader">LLM-powered drones</div>
+        <img id="drone-image" src="https://cdn4.iconfinder.com/data/icons/blue-common-symbols-vol-1/2327/drone_2_uav_aircraft_dawdler_app_mobile-512.png" alt="Drone Image">
     </div>
 
+<div id="chat-container"></div>
+    <input type="text" id="user-input" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send</button>
+
     <script>
-        function sendQuestion() {
-            var question = document.getElementById('chatbox').value;
-            fetch('/ask', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ question: question }),
-            })
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('output').innerText += '\n' + data.response;
-                    document.getElementById('chatbox').value = '';
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
+        function sendMessage() {
+            var user_input = document.getElementById('user-input').value;
+            if (user_input) {
+                appendMessage('User', user_input);
+                document.getElementById('user-input').value = '';
+
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/ask', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200)
+                    {
+                        var response = JSON.parse(xhr.responseText).response;
+                        appendMessage('Drone', response);
+                    }
+                };
+                xhr.send('user_input=' + encodeURIComponent(user_input));
+            }
+        }
+
+        function appendMessage(role, content) {
+            var chatContainer = document.getElementById('chat-container');
+            var messageDiv = document.createElement('div');
+            var formattedContent = '';
+
+            var parts = content.split(/```python|```/);
+            for (var i = 0; i < parts.length; i++) {
+                if (i % 2 === 0) {
+                    formattedContent += formatInlineCode(parts[i]);
+                } else {
+                    var pre = document.createElement('pre');
+                    var code = document.createElement('code');
+                    code.textContent = parts[i];
+                    pre.appendChild(code);
+                    formattedContent += pre.outerHTML;
+                }
+            }
+
+            messageDiv.innerHTML = '<strong>' + role + ':</strong> ' + formattedContent;
+            chatContainer.appendChild(messageDiv);
+        }
+
+        function formatInlineCode(text) {
+            return text.replace(/`(.*?)`/g, '<code>$1</code>');
         }
     </script>
 </body>
-
 </html>
