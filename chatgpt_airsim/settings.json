@@ -15,6 +15,12 @@
                 "Height": 480,
                 "FOV_Degrees": 90
             }
-        ]
+        ],
+        "Gimbal": {
+            "Stabilization": 0,
+            "Pitch": NaN,
+            "Roll": NaN,
+            "Yaw": NaN
+        }
     }
 }
