@@ -12,13 +12,15 @@
 - Take photo the drone takes and then process that into answering certain instruction based questions like GPT-4
 - If we have time, switch this out for a fancy model like LLaVA
 
-### 4. Implement 'brownian motion'
+### 4. Implement 'flutter'
 - So the drones aren't sitting ducks for targets
 - Oscillates
 - STRETCH* a version where if it is a swarm, it moves in a confusing swarm pattern
 
-### 5. Multiple drones
+### 5. Multiple drones/objects
 - Multiple drones swarming to one object at once. 
+- Detect multiple objects 
+
 
 
 
