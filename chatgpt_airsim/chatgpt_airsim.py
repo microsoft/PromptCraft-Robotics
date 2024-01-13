@@ -7,6 +7,8 @@ import numpy as np
 import os
 import json
 import time
+import requests
+from google.cloud import vision
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--prompt", type=str, default="prompts/airsim_basic.txt")
@@ -110,6 +112,19 @@ while True:
         continue
 
     response = ask(question)
+
+    if 'count' in question:
+        # @Kaien: take an image function
+        path = 'path to image'
+        client = vision.ImageAnnotatorClient()
+
+        with open(path, "rb") as image_file:
+            content = image_file.read()
+        image = vision.Image(content=content)
+
+        objects = client.object_localization(image=image).localized_object_annotations
+
+        response = "Number of objects found: {len(objects)}"
 
     print(f"\n{response}\n")
 
