@@ -1,3 +1,5 @@
+import base64
+import json
 import math
 import random
 import threading
@@ -5,6 +7,9 @@ import time
 
 import airsim
 import numpy as np
+import openai
+import requests
+from airsim import Client, ImageRequest, ImageType
 
 objects_dict = {
     "turbine1": "BP_Wind_Turbines_C_1",
@@ -25,6 +30,7 @@ class AirSimWrapper:
         self.client.enableApiControl(True)
         self.client.armDisarm(True)
         self.stop_thread = False
+        self.flutter_thread = None
 
     def takeoff(self):
         self.client.takeoffAsync().join()
@@ -131,3 +137,54 @@ class AirSimWrapper:
         self.stop_thread = True
         if self.flutter_thread is not None:
             self.flutter_thread.join()
+
+    def take_photo(client: Client, vehicle_name: str):
+        request = ImageRequest("0", ImageType.scene, False, False)
+        response = client.simGetImages([request], vehicle_name)
+
+        if response:
+            image_response = response[0]
+
+            image_response = base64.b64encode(image_response).decode("utf-8")
+
+            return image_response.image_data_uint8
+
+    def analyze_with_vision_model(image_data):
+        # Load API key from config.json
+        with open("config.json") as f:
+            data = json.load(f)
+            api_key = data["API_key"]
+
+        # Convert image data to base64
+        base64_image = base64.b64encode(image_data).decode("utf-8")
+
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {api_key}",
+        }
+
+        payload = {
+            "model": "gpt-4-vision-preview",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": [
+                        {"type": "text", "text": "How many people are in this image?"},
+                        {
+                            "type": "image_url",
+                            "image_url": {
+                                "url": f"data:image/jpeg;base64,{base64_image}"
+                            },
+                        },
+                    ],
+                }
+            ],
+            "max_tokens": 2000,
+        }
+
+        response = requests.post(
+            "https://api.openai.com/v1/chat/completions", headers=headers, json=payload
+        )
+
+        # Return the response
+        return response.json()
