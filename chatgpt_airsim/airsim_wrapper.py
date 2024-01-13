@@ -11,6 +11,7 @@ import cv2
 import numpy as np
 import openai
 import requests
+from google.cloud import vision
 
 objects_dict = {
     "turbine1": "BP_Wind_Turbines_C_1",
@@ -175,59 +176,61 @@ class AirSimWrapper:
         return base64_image
 
     def analyze_with_vision_model(self, image_data):
-        # Load API key from config.json
-        with open("config.json") as f:
-            data = json.load(f)
-            api_key = data["OPENAI_API_KEY"]
-
-        if isinstance(image_data, str):
-            image_data = image_data.encode()
-
-        # Convert image data to base64
-        base64_image = base64.b64encode(image_data).decode("utf-8")
-
-        headers = {
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {api_key}",
-        }
-
-        payload = {
-            "model": "gpt-4-vision-preview",
-            "messages": [
-                {
-                    "role": "user",
-                    "content": [
-                        {"type": "text", "text": "How many people are in this image?"},
-                        {
-                            "type": "image_url",
-                            "image_url": {
-                                "url": f"data:image/jpeg;base64,{base64_image}"
-                            },
-                        },
-                    ],
-                }
-            ],
-            "max_tokens": 2000,
-        }
-
-        response = requests.post(
-            "https://api.openai.com/v1/chat/completions", headers=headers, json=payload
-        )
-
-        # Return the response
-        return response.json()
-
         # Google Vision API: https://cloud.google.com/vision/docs/object-localizer
-        # path = "path to image"
-        # client = vision.ImageAnnotatorClient()
+        #path = "path to image"
+        client = vision.ImageAnnotatorClient()
 
-        # with open(path, "rb") as image_file:
-        #     content = image_file.read()
-        # image = vision.Image(content=content)
+        #with open(path, "rb") as image_file:
+        content = image_data.read()
+        image = vision.Image(content=content)
 
-        # objects = client.object_localization(image=image).localized_object_annotations
+        objects = client.object_localization(image=image).localized_object_annotations
 
-    def query_language_model(prompt):
+        return objects
+
+        # Load API key from config.json
+        # with open("config.json") as f:
+        #     data = json.load(f)
+        #     api_key = data["OPENAI_API_KEY"]
+
+        # if isinstance(image_data, str):
+        #     image_data = image_data.encode()
+
+        # # Convert image data to base64
+        # base64_image = base64.b64encode(image_data).decode("utf-8")
+
+        # headers = {
+        #     "Content-Type": "application/json",
+        #     "Authorization": f"Bearer {api_key}",
+        # }
+
+        # payload = {
+        #     "model": "gpt-4-vision-preview",
+        #     "messages": [
+        #         {
+        #             "role": "user",
+        #             "content": [
+        #                 {"type": "text", "text": "How many people are in this image?"},
+        #                 {
+        #                     "type": "image_url",
+        #                     "image_url": {
+        #                         "url": f"data:image/jpeg;base64,{base64_image}"
+        #                     },
+        #                 },
+        #             ],
+        #         }
+        #     ],
+        #     "max_tokens": 2000,
+        # }
+
+        # response = requests.post(
+        #     "https://api.openai.com/v1/chat/completions", headers=headers, json=payload
+        # )
+
+        # # Return the response
+        # return response.json()
+
+    def query_language_model(self, prompt):
         with open("config.json", "r") as f:
             config = json.load(f)
         openai.api_key = config["OPENAI_API_KEY"]
@@ -248,11 +251,7 @@ class AirSimWrapper:
         image_data = self.take_photo(filename)
         vision_outputs = self.analyze_with_vision_model(image_data)
         # Naive: converts vision model json output to string, append to count prompt
-        prompt = (
-            "\n Based on this json output, count the number of instances of "
-            + object_name
-            + " in the scene. Return a single number"
-        )
+        prompt = "\n Based on this json output, count the number of instances of " + object_name + " in the scene. Return a single number"
         return self.query_language_model(str(vision_outputs) + prompt)
 
     def search(self, object_name, radius):
@@ -264,17 +263,13 @@ class AirSimWrapper:
             radius,
             self.get_position(object_name)[2],
         )
-        vision_outputs = []
+        vision_outputs = ""
         for point in circular_path:
             self.fly_to(point)
             image_data = self.take_photo(str(point))
             vision_output = self.analyze_with_vision_model(image_data)
-            vision_outputs.append(vision_output)
-        prompt = (
-            "\n Based on these json outputs, is "
-            + object_name
-            + "present in the scene? Return TRUE or FALSE."
-        )
+            vision_outputs += str(vision_output)
+        prompt = "\n Based on these json outputs, is " + object_name + "present in the scene? Return TRUE or FALSE."
         return self.query_language_model(str(vision_outputs) + prompt)
 
     def get_latitude_longitude(self, object_name):
