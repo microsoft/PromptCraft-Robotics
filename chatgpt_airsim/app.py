@@ -35,14 +35,22 @@ def ask():
     user_input = request.form['user_input']
     response = get_chatbot_response(user_input)
     code = extract_python_code(response)
+    import sys
+    from io import StringIO
+
+    old_stdout = sys.stdout
+    redirected_output = sys.stdout = StringIO()
+
     if code is not None:
         exec(code)
-    return jsonify({'response': response})
+    sys.stdout = old_stdout
+    return jsonify({'response': response + "\n\n" + redirected_output.getvalue()})
 
 def get_chatbot_response(user_input):
     chat_history.append({'role': 'user', 'content': user_input})
     completion = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
+        # model="gpt-3.5-turbo",
+        model="gpt-4",
         messages=chat_history,
         temperature=0
     )
@@ -60,5 +68,8 @@ def extract_python_code(content):
     else:
         return None
 
+with open("prompts/airsim_basic.txt", "r") as f:
+    prompt = f.read()
+get_chatbot_response(prompt)
 if __name__ == '__main__':
     app.run(debug=True)

@@ -81,6 +81,8 @@ class AirSimWrapper:
         while len(object_names_ue) == 0:
             object_names_ue = self.client.simListSceneObjects(query_string)
         pose = self.client.simGetObjectPose(object_names_ue[0])
+        if object_name == "crowd":
+            return [pose.position.x_val+2, pose.position.y_val, pose.position.z_val]
         return [pose.position.x_val, pose.position.y_val, pose.position.z_val]
 
     @staticmethod
@@ -150,7 +152,7 @@ class AirSimWrapper:
             path.append(x, y, z)
         return path
 
-    def take_photo(self, filename):
+    def take_photo(self, filename="image.png"):
         responses = self.client.simGetImages(
             [airsim.ImageRequest("0", airsim.ImageType.Scene, False, False)]
         )
@@ -181,7 +183,7 @@ class AirSimWrapper:
         client = vision.ImageAnnotatorClient()
 
         #with open(path, "rb") as image_file:
-        content = image_data.read()
+        content = base64.b64decode(image_data)
         image = vision.Image(content=content)
 
         objects = client.object_localization(image=image).localized_object_annotations
@@ -247,12 +249,14 @@ class AirSimWrapper:
 
     # Complex commands
     def count(self, object_name):
-        filename = "count" + object_name + ".jpg"
-        image_data = self.take_photo(filename)
+        image_data = self.take_photo()
         vision_outputs = self.analyze_with_vision_model(image_data)
         # Naive: converts vision model json output to string, append to count prompt
-        prompt = "\n Based on this json output, count the number of instances of " + object_name + " in the scene. Return a single number"
-        return self.query_language_model(str(vision_outputs) + prompt)
+        prompt = "\n\n Based on this json output, count the number of instances of " + object_name + " in the scene. Return a single number"
+        response = self.query_language_model(str(vision_outputs) + prompt)
+        print(response)
+        return response
+        
 
     def search(self, object_name, radius):
         # code motion
