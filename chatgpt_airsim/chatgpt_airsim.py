@@ -1,12 +1,14 @@
-import openai
-import re
 import argparse
-from airsim_wrapper import *
-import math
-import numpy as np
-import os
 import json
+import math
+import os
+import re
 import time
+
+import numpy as np
+import openai
+import requests
+from airsim_wrapper import *
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--prompt", type=str, default="prompts/airsim_basic.txt")
@@ -23,22 +25,16 @@ with open(args.sysprompt, "r") as f:
     sysprompt = f.read()
 
 chat_history = [
-    {
-        "role": "system",
-        "content": sysprompt
-    },
-    {
-        "role": "user",
-        "content": "move 10 units up"
-    },
+    {"role": "system", "content": sysprompt},
+    {"role": "user", "content": "move 10 units up"},
     {
         "role": "assistant",
         "content": """```python
 aw.fly_to([aw.get_drone_position()[0], aw.get_drone_position()[1], aw.get_drone_position()[2]+10])
 ```
 
-This code uses the `fly_to()` function to move the drone to a new position that is 10 units up from the current position. It does this by getting the current position of the drone using `get_drone_position()` and then creating a new list with the same X and Y coordinates, but with the Z coordinate increased by 10. The drone will then fly to this new position using `fly_to()`."""
-    }
+This code uses the `fly_to()` function to move the drone to a new position that is 10 units up from the current position. It does this by getting the current position of the drone using `get_drone_position()` and then creating a new list with the same X and Y coordinates, but with the Z coordinate increased by 10. The drone will then fly to this new position using `fly_to()`.""",
+    },
 ]
 
 
@@ -50,9 +46,7 @@ def ask(prompt):
         }
     )
     completion = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=chat_history,
-        temperature=0
+        model="gpt-4", messages=chat_history, temperature=0
     )
     chat_history.append(
         {
@@ -97,7 +91,9 @@ with open(args.prompt, "r") as f:
     prompt = f.read()
 
 ask(prompt)
-print("Welcome to the AirSim chatbot! I am ready to help you with your AirSim questions and commands.")
+print(
+    "Welcome to the AirSim chatbot! I am ready to help you with your AirSim questions and commands."
+)
 
 while True:
     question = input(colors.YELLOW + "AirSim> " + colors.ENDC)
